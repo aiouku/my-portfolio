@@ -1,6 +1,10 @@
 "use client";
 
 import { useTypingEffect, useScrollAnimation } from "../hooks/useScrollAnimation";
+import dynamic from "next/dynamic";
+
+// Dynamically import ASCIIText to avoid SSR issues with Three.js
+const ASCIIText = dynamic(() => import("./ASCIIText"), { ssr: false });
 
 const socialLinks = [
     {
@@ -61,14 +65,28 @@ export default function HeroSection() {
                     Available for work
                 </div>
 
-                {/* Name */}
-                <h1
-                    className={`mb-4 text-5xl font-bold tracking-tight sm:text-7xl lg:text-8xl transition-all duration-700 delay-100 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                {/* Intro Text */}
+                <p
+                    className={`mb-2 text-2xl font-medium text-zinc-300 sm:text-3xl transition-all duration-700 delay-100 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                         }`}
                 >
-                    Hi, I'm{" "}
-                    <span className="gradient-text">Kei Tanaka</span>
-                </h1>
+                    Hi, I'm
+                </p>
+
+                {/* ASCII Name Animation */}
+                <div
+                    className={`relative w-full h-[280px] sm:h-[380px] lg:h-[450px] mb-6 transition-all duration-700 delay-150 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                        }`}
+                >
+                    <ASCIIText
+                        text="Kei Tanaka"
+                        enableWaves={true}
+                        asciiFontSize={10}
+                        textFontSize={280}
+                        planeBaseHeight={14}
+                        textColor="#00f5ff"
+                    />
+                </div>
 
                 {/* Typing Subtitle */}
                 <div
