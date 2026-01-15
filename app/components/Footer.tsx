@@ -27,8 +27,7 @@ export default function Footer() {
                     {/* Brand */}
                     <div>
                         <a href="#home" className="inline-block text-2xl font-bold">
-                            <span className="gradient-text">K</span>
-                            <span className="text-white">ei</span>
+                            <span className="gradient-text">aiouku</span>
                         </a>
                         <p className="mt-4 text-sm leading-relaxed text-zinc-400">
                             Building interactive experiences and web apps.
@@ -80,13 +79,13 @@ export default function Footer() {
                 {/* Copyright */}
                 <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-zinc-800 pt-8 sm:flex-row">
                     <p className="text-sm text-zinc-500">
-                        © {currentYear} Kei Tanaka. All rights reserved.
+                        © {currentYear} aiouku. All rights reserved.
                     </p>
                     <p className="text-sm text-zinc-500">
                         Built with{" "}
                         <span className="text-cyan-400">Next.js</span>
                         {" "}& {" "}
-                        <span className="text-purple-400">Tailwind CSS</span>
+                        <span className="text-cyan-400">Tailwind CSS</span>
                     </p>
                 </div>
             </div>

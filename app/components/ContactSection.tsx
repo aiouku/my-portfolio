@@ -11,8 +11,8 @@ const contactMethods = [
             </svg>
         ),
         label: "Email",
-        value: "kei@example.com",
-        href: "mailto:kei@example.com",
+        value: "keitanaka2005@gmail.com",
+        href: "mailto:keitanaka2005@gmail.com",
     },
     {
         icon: (
@@ -32,8 +32,8 @@ const contactMethods = [
             </svg>
         ),
         label: "GitHub",
-        value: "@keitanaka",
-        href: "https://github.com/",
+        value: "@aiouku",
+        href: "https://github.com/aiouku",
     },
 ];
 
@@ -45,16 +45,42 @@ export default function ContactSection() {
         message: "",
     });
     const [isSending, setIsSending] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
     const [focusedField, setFocusedField] = useState<string | null>(null);
+
+    // Replace YOUR_FORM_ID with your Formspree form ID from https://formspree.io
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/maqqnbgq";
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSending(true);
-        // Simulate sending
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        setIsSending(false);
-        setFormState({ name: "", email: "", message: "" });
-        alert("Message sent! (This is a demo)");
+        setSubmitStatus("idle");
+
+        try {
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                body: JSON.stringify({
+                    name: formState.name,
+                    email: formState.email,
+                    message: formState.message,
+                }),
+            });
+
+            if (response.ok) {
+                setSubmitStatus("success");
+                setFormState({ name: "", email: "", message: "" });
+            } else {
+                setSubmitStatus("error");
+            }
+        } catch {
+            setSubmitStatus("error");
+        } finally {
+            setIsSending(false);
+        }
     };
 
     return (
@@ -99,7 +125,7 @@ export default function ContactSection() {
                                         }`}
                                     style={{ transitionDelay: `${300 + index * 100}ms` }}
                                 >
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 text-cyan-400 transition-colors group-hover:from-cyan-500/30 group-hover:to-purple-500/30">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-400 transition-colors group-hover:bg-cyan-500/30">
                                         {method.icon}
                                     </div>
                                     <div>
@@ -132,7 +158,7 @@ export default function ContactSection() {
                             }`}
                     >
                         <form onSubmit={handleSubmit} className="glass-card rounded-3xl p-8">
-                            <h3 className="mb-6 text-xl font-semibold">Send a Message</h3>
+                            <h3 className="mb-6 text-xl font-semibold">Send a Message to aiouku</h3>
 
                             <div className="space-y-6">
                                 {/* Name Field */}
@@ -151,8 +177,8 @@ export default function ContactSection() {
                                     <label
                                         htmlFor="name"
                                         className={`pointer-events-none absolute left-4 transition-all duration-200 ${focusedField === "name" || formState.name
-                                                ? "top-2 text-xs text-cyan-400"
-                                                : "top-1/2 -translate-y-1/2 text-sm text-zinc-500"
+                                            ? "top-2 text-xs text-cyan-400"
+                                            : "top-1/2 -translate-y-1/2 text-sm text-zinc-500"
                                             }`}
                                     >
                                         Your Name
@@ -175,11 +201,11 @@ export default function ContactSection() {
                                     <label
                                         htmlFor="email"
                                         className={`pointer-events-none absolute left-4 transition-all duration-200 ${focusedField === "email" || formState.email
-                                                ? "top-2 text-xs text-cyan-400"
-                                                : "top-1/2 -translate-y-1/2 text-sm text-zinc-500"
+                                            ? "top-2 text-xs text-cyan-400"
+                                            : "top-1/2 -translate-y-1/2 text-sm text-zinc-500"
                                             }`}
                                     >
-                                        Email Address
+                                        Your Email Address
                                     </label>
                                 </div>
 
@@ -199,8 +225,8 @@ export default function ContactSection() {
                                     <label
                                         htmlFor="message"
                                         className={`pointer-events-none absolute left-4 transition-all duration-200 ${focusedField === "message" || formState.message
-                                                ? "top-2 text-xs text-cyan-400"
-                                                : "top-4 text-sm text-zinc-500"
+                                            ? "top-2 text-xs text-cyan-400"
+                                            : "top-4 text-sm text-zinc-500"
                                             }`}
                                     >
                                         Your Message
@@ -240,6 +266,18 @@ export default function ContactSection() {
                                         </span>
                                     )}
                                 </button>
+
+                                {/* Status Messages */}
+                                {submitStatus === "success" && (
+                                    <div className="rounded-xl border border-green-500/30 bg-green-500/10 p-4 text-center text-green-300">
+                                        ✓ Message sent successfully! I'll get back to you soon.
+                                    </div>
+                                )}
+                                {submitStatus === "error" && (
+                                    <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-center text-red-300">
+                                        ✗ Failed to send message. Please try again or email me directly.
+                                    </div>
+                                )}
                             </div>
                         </form>
                     </div>

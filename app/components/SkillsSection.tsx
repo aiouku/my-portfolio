@@ -57,7 +57,7 @@ function SkillBar({ skill, index, shouldAnimate }: { skill: typeof skills[0]; in
             </div>
             <div className="h-2 overflow-hidden rounded-full bg-zinc-800">
                 <div
-                    className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 transition-all duration-1000 ease-out"
+                    className="h-full rounded-full bg-cyan-500 transition-all duration-1000 ease-out"
                     style={{ width: `${width}%` }}
                 />
             </div>

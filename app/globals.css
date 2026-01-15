@@ -5,17 +5,15 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* Color Palette */
+  /* Color Palette - Minimal: Black, Cyan, White */
   --background: #0a0a0f;
   --foreground: #ededed;
   --accent-cyan: #00f5ff;
-  --accent-purple: #a855f7;
-  --accent-teal: #14b8a6;
-  --accent-pink: #ec4899;
+  --accent-cyan-dim: #00c4cc;
   
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
-  --gradient-glow: linear-gradient(135deg, var(--accent-cyan), var(--accent-teal));
+  --gradient-primary: linear-gradient(135deg, var(--accent-cyan), var(--accent-cyan-dim));
+  --gradient-glow: linear-gradient(135deg, var(--accent-cyan), var(--accent-cyan-dim));
   --gradient-card: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
   
   /* Glass Effect */
@@ -25,7 +23,6 @@
   
   /* Shadows */
   --shadow-glow-cyan: 0 0 30px rgba(0, 245, 255, 0.3);
-  --shadow-glow-purple: 0 0 30px rgba(168, 85, 247, 0.3);
 }
 
 @theme inline {
@@ -164,21 +161,15 @@
 
 /* Gradient Text */
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
-  background-size: 200% 200%;
+  background: var(--accent-cyan);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gradient-shift 4s ease infinite;
 }
 
 /* Glow Effects */
 .glow-cyan {
   box-shadow: 0 0 30px rgba(0, 245, 255, 0.4);
-}
-
-.glow-purple {
-  box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
 }
 
 .text-glow-cyan {
@@ -189,7 +180,7 @@
 .btn-glow {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-teal));
+  background: var(--accent-cyan);
   transition: all 0.3s ease;
 }
 
@@ -286,7 +277,7 @@
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+  background: var(--accent-cyan);
   border-radius: 9999px;
   animation: progress-fill 1.5s ease-out forwards;
 }
@@ -316,12 +307,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));
+  background: var(--accent-cyan);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--accent-purple), var(--accent-cyan));
+  background: var(--accent-cyan-dim);
 }
 
 /* Selection */

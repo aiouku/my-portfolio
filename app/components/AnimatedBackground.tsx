@@ -9,14 +9,14 @@ export default function AnimatedBackground() {
     return (
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
             {/* Dither Background Effect */}
-            <div className="absolute inset-0 pointer-events-auto">
+            <div className="absolute inset-0 pointer-events-auto opacity-40">
                 <Dither
-                    waveColor={[0.0, 0.6, 0.65]}
+                    waveColor={[0.0, 0.3, 0.35]}
                     disableAnimation={false}
                     enableMouseInteraction={true}
                     mouseRadius={0.3}
                     colorNum={4}
-                    waveAmplitude={0.3}
+                    waveAmplitude={0.2}
                     waveFrequency={3}
                     waveSpeed={0.05}
                 />
@@ -44,3 +44,4 @@ export default function AnimatedBackground() {
         </div>
     );
 }
+

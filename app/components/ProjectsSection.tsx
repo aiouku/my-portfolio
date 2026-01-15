@@ -6,19 +6,19 @@ import { useScrollAnimation } from "../hooks/useScrollAnimation";
 const projects = [
     {
         id: 1,
-        title: "p5.js 2D Platformer",
-        description: "A scrolling platformer prototype with block patterns, pitfalls, and stage composition logic. Built with vanilla JavaScript and p5.js for creative coding exploration.",
-        image: "🎮",
-        tech: ["p5.js", "JavaScript", "Canvas"],
-        category: "game",
-        link: "https://github.com/",
+        title: "News Podcaster",
+        description: "A hackathon-built mobile app using Flutter + Dart, scraping news articles and summarizing them via Gemini API, then converting the summary into a playable podcast. Won GDGC Summer Hackathon 2024 (Audience Prize).",
+        image: "/images/projects/news-podcaster.png",
+        tech: ["Flutter", "Dart", "Gemini API"],
+        category: "mobile",
+        link: "https://github.com/aiouku/news_podcaster",
         featured: true,
     },
     {
         id: 2,
         title: "Unity Game Prototype",
         description: "A mid-scale Unity game prototype focusing on feel and novelty with iterative playtesting. Implemented custom physics and particle systems.",
-        image: "🕹️",
+        image: "/images/projects/unity-game.png",
         tech: ["Unity", "C#", "Shader Graph"],
         category: "game",
         link: "https://github.com/",
@@ -27,30 +27,31 @@ const projects = [
     {
         id: 3,
         title: "Portfolio Website",
-        description: "This very portfolio! Built with Next.js 14, featuring glassmorphism design, smooth animations, and responsive layouts.",
+        description: "This very portfolio! Built with Next.js, featuring ASCII text animations, dithered backgrounds, and a sleek cyberpunk design.",
         image: "🌐",
         tech: ["Next.js", "TypeScript", "Tailwind"],
         category: "web",
-        link: "https://github.com/",
+        link: "https://github.com/aiouku/my-portfolio",
         featured: false,
     },
     {
         id: 4,
-        title: "Interactive Art Generator",
-        description: "Creative coding project that generates abstract art pieces using mathematical algorithms and user interaction.",
-        image: "🎨",
-        tech: ["p5.js", "WebGL", "GLSL"],
-        category: "creative",
-        link: "https://github.com/",
+        title: "YouTube Analyst",
+        description: "A Python tool that calculates the total viewing time from your YouTube watch-history.html file. Analyze your viewing habits.",
+        image: "📊",
+        tech: ["Python", "HTML Parsing", "Data Analysis"],
+        category: "tool",
+        link: "https://github.com/aiouku/YoutubeAnalyst",
         featured: false,
     },
 ];
 
 const categories = [
     { id: "all", label: "All Projects" },
+    { id: "mobile", label: "Mobile" },
     { id: "game", label: "Games" },
     { id: "web", label: "Web" },
-    { id: "creative", label: "Creative" },
+    { id: "tool", label: "Tools" },
 ];
 
 function ProjectCard({ project, index, isVisible }: { project: typeof projects[0]; index: number; isVisible: boolean }) {
@@ -87,20 +88,28 @@ function ProjectCard({ project, index, isVisible }: { project: typeof projects[0
         >
             {/* Glow effect on hover */}
             <div
-                className={`absolute -inset-0.5 rounded-3xl bg-gradient-to-r from-cyan-500 to-purple-500 opacity-0 blur transition-opacity duration-500 ${isHovered ? "opacity-50" : ""
+                className={`absolute -inset-0.5 rounded-3xl bg-cyan-500 opacity-0 blur transition-opacity duration-500 ${isHovered ? "opacity-50" : ""
                     }`}
             />
 
             <article className="glass-card relative flex h-full flex-col overflow-hidden rounded-3xl">
-                {/* Image/Emoji Placeholder */}
-                <div className="relative flex h-48 items-center justify-center bg-gradient-to-br from-zinc-800/50 to-zinc-900/50">
-                    <span className="text-7xl transition-transform duration-500 group-hover:scale-110">
-                        {project.image}
-                    </span>
+                {/* Project Image or Emoji */}
+                <div className="relative h-48 overflow-hidden bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 flex items-center justify-center">
+                    {project.image.startsWith('/') ? (
+                        <img
+                            src={project.image}
+                            alt={project.title}
+                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                    ) : (
+                        <span className="text-7xl transition-transform duration-500 group-hover:scale-110">
+                            {project.image}
+                        </span>
+                    )}
 
                     {/* Featured Badge */}
                     {project.featured && (
-                        <span className="absolute right-4 top-4 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 px-3 py-1 text-xs font-semibold text-white">
+                        <span className="absolute right-4 top-4 rounded-full bg-cyan-500 px-3 py-1 text-xs font-semibold text-white">
                             Featured
                         </span>
                     )}
@@ -168,7 +177,7 @@ export default function ProjectsSection() {
                     className={`mb-12 text-center transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                         }`}
                 >
-                    <span className="mb-4 inline-block rounded-full border border-purple-500/30 bg-purple-500/10 px-4 py-1.5 text-sm text-purple-300">
+                    <span className="mb-4 inline-block rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-300">
                         My Work
                     </span>
                     <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
@@ -190,12 +199,12 @@ export default function ProjectsSection() {
                             key={cat.id}
                             onClick={() => setActiveCategory(cat.id)}
                             className={`relative rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300 ${activeCategory === cat.id
-                                    ? "text-zinc-900"
-                                    : "text-zinc-400 hover:text-white"
+                                ? "text-zinc-900"
+                                : "text-zinc-400 hover:text-white"
                                 }`}
                         >
                             {activeCategory === cat.id && (
-                                <span className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500" />
+                                <span className="absolute inset-0 rounded-full bg-cyan-400" />
                             )}
                             <span className="relative">{cat.label}</span>
                         </button>
@@ -220,7 +229,7 @@ export default function ProjectsSection() {
                         }`}
                 >
                     <a
-                        href="https://github.com/"
+                        href="https://github.com/aiouku"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group inline-flex items-center gap-2 text-zinc-400 transition-colors hover:text-cyan-400"

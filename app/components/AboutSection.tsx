@@ -4,21 +4,27 @@ import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 const timeline = [
     {
+        year: "2025",
+        title: "Joined Life is Tech!",
+        description: "Started working as a mentor providing IT education to teenagers.",
+        type: "work",
+    },
+    {
         year: "2024",
-        title: "Studying Computer Science",
-        description: "Focusing on game development, web technologies, and interactive media.",
+        title: "Won GDSC Hackathon",
+        description: "Won the Audience Prize at GDSC Japan Summer Hackathon with News Podcaster app.",
+        type: "achievement",
+    },
+    {
+        year: "2024",
+        title: "Entered Waseda University",
+        description: "Started studying Computer Science at Waseda University.",
         type: "education",
     },
     {
-        year: "2023",
-        title: "Started Unity Development",
-        description: "Built first game prototypes and learned C# programming.",
-        type: "milestone",
-    },
-    {
-        year: "2022",
-        title: "Web Development Journey",
-        description: "Learned React, Next.js, and modern frontend development.",
+        year: "2019",
+        title: "Started Programming",
+        description: "Began my coding journey at age 14, learning Python and building tools for games.",
         type: "milestone",
     },
 ];
@@ -54,7 +60,7 @@ export default function AboutSection() {
                     >
                         {/* Animated Profile Container */}
                         <div className="relative mb-8 inline-block">
-                            <div className="animate-spin-slow absolute -inset-1 rounded-3xl bg-gradient-to-r from-cyan-500 via-purple-500 to-teal-500 opacity-50 blur-lg" />
+                            <div className="animate-spin-slow absolute -inset-1 rounded-3xl bg-cyan-500 opacity-50 blur-lg" />
                             <div className="animate-morph relative h-64 w-64 overflow-hidden bg-gradient-to-br from-zinc-800 to-zinc-900 sm:h-80 sm:w-80">
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     <span className="text-6xl">👨‍💻</span>
@@ -63,24 +69,24 @@ export default function AboutSection() {
                         </div>
 
                         <h3 className="mb-4 text-2xl font-semibold">
-                            Hello! I'm <span className="text-cyan-400">Kei</span>
+                            Hello! I'm <span className="text-cyan-400">aiouku</span>
                         </h3>
                         <p className="mb-4 leading-relaxed text-zinc-400">
-                            I'm a student developer based in Tokyo, Japan, passionate about creating
-                            interactive experiences that blend creativity with technology. My journey
-                            started with curiosity about how games and websites work.
+                            I'm a Computer Science student at Waseda University, passionate about
+                            building interactive experiences. I started programming at 14 and
+                            have been exploring game dev, web apps, and creative coding ever since.
                         </p>
                         <p className="mb-6 leading-relaxed text-zinc-400">
-                            Today, I specialize in Unity game development, creative coding with p5.js,
-                            and building modern web applications with React and Next.js. I love
-                            prototyping ideas quickly and iterating based on user feedback.
+                            Currently working at Life is Tech!, inspiring the next generation of
+                            developers. I love hackathons, rapid prototyping, and turning ideas
+                            into reality through code.
                         </p>
 
                         {/* Stats */}
                         <div className="grid grid-cols-3 gap-4">
                             {[
-                                { value: "10+", label: "Projects" },
-                                { value: "2+", label: "Years" },
+                                { value: "5+", label: "Years Coding" },
+                                { value: "🏆", label: "Hackathon Win" },
                                 { value: "∞", label: "Curiosity" },
                             ].map((stat) => (
                                 <div
@@ -102,16 +108,16 @@ export default function AboutSection() {
                         <h3 className="mb-8 text-2xl font-semibold">My Journey</h3>
                         <div className="relative">
                             {/* Timeline Line */}
-                            <div className="absolute left-4 top-0 h-full w-0.5 bg-gradient-to-b from-cyan-500 via-purple-500 to-transparent" />
+                            <div className="absolute left-4 top-0 h-full w-0.5 bg-cyan-500" />
 
                             {/* Timeline Items */}
                             <div className="space-y-8">
                                 {timeline.map((item, index) => (
                                     <div
-                                        key={item.year}
+                                        key={index}
                                         className={`relative pl-12 transition-all duration-500 ${isVisible
-                                                ? "translate-y-0 opacity-100"
-                                                : "translate-y-4 opacity-0"
+                                            ? "translate-y-0 opacity-100"
+                                            : "translate-y-4 opacity-0"
                                             }`}
                                         style={{ transitionDelay: `${600 + index * 150}ms` }}
                                     >

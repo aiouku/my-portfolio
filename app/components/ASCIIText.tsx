@@ -588,7 +588,7 @@ export default function ASCIIText({
           position: absolute;
           left: 0;
           top: 0;
-          background-image: linear-gradient(135deg, #00f5ff 0%, #a855f7 50%, #ec4899 100%);
+          background-image: linear-gradient(135deg, #00f5ff 0%, #00c4cc 100%);
           background-attachment: fixed;
           -webkit-text-fill-color: transparent;
           -webkit-background-clip: text;
