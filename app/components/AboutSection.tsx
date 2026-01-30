@@ -1,33 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
-
-const timeline = [
-    {
-        year: "2025",
-        title: "Joined Life is Tech!",
-        description: "Started working as a mentor providing IT education to teenagers.",
-        type: "work",
-    },
-    {
-        year: "2024",
-        title: "Won GDSC Hackathon",
-        description: "Won the Audience Prize at GDSC Japan Summer Hackathon with News Podcaster app.",
-        type: "achievement",
-    },
-    {
-        year: "2024",
-        title: "Entered Waseda University",
-        description: "Started studying Computer Science at Waseda University.",
-        type: "education",
-    },
-    {
-        year: "2019",
-        title: "Started Programming",
-        description: "Began my coding journey at age 14, learning Python and building tools for games.",
-        type: "milestone",
-    },
-];
+import { journeyData } from "../lib/journeyData";
 
 export default function AboutSection() {
     const [ref, isVisible] = useScrollAnimation<HTMLElement>({ threshold: 0.1 });
@@ -69,7 +44,7 @@ export default function AboutSection() {
                         </div>
 
                         <h3 className="mb-4 text-2xl font-semibold">
-                            Hello! I'm <span className="text-cyan-400">aiouku</span>
+                            Hello! I'm <span className="text-cyan-400">Kei Tanaka</span>
                         </h3>
                         <p className="mb-4 leading-relaxed text-zinc-400">
                             I'm a Computer Science student at Waseda University, passionate about
@@ -112,9 +87,9 @@ export default function AboutSection() {
 
                             {/* Timeline Items */}
                             <div className="space-y-8">
-                                {timeline.map((item, index) => (
+                                {journeyData.map((item, index) => (
                                     <div
-                                        key={index}
+                                        key={item.id}
                                         className={`relative pl-12 transition-all duration-500 ${isVisible
                                             ? "translate-y-0 opacity-100"
                                             : "translate-y-4 opacity-0"
@@ -127,7 +102,10 @@ export default function AboutSection() {
                                         </div>
 
                                         {/* Content */}
-                                        <div className="glass-card rounded-2xl p-5">
+                                        <Link
+                                            href={`/journey/${item.slug}`}
+                                            className="glass-card block rounded-2xl p-5 transition-all duration-300 hover:border-cyan-500/50 hover:shadow-[0_0_20px_rgba(0,245,255,0.15)]"
+                                        >
                                             <div className="mb-2 flex items-center gap-3">
                                                 <span className="rounded-full bg-cyan-500/20 px-3 py-1 text-xs font-medium text-cyan-300">
                                                     {item.year}
@@ -135,10 +113,23 @@ export default function AboutSection() {
                                                 <span className="text-xs text-zinc-500 capitalize">
                                                     {item.type}
                                                 </span>
+                                                <svg
+                                                    className="ml-auto h-4 w-4 text-zinc-500 transition-transform group-hover:translate-x-1"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M9 5l7 7-7 7"
+                                                    />
+                                                </svg>
                                             </div>
                                             <h4 className="mb-1 font-semibold text-white">{item.title}</h4>
                                             <p className="text-sm text-zinc-400">{item.description}</p>
-                                        </div>
+                                        </Link>
                                     </div>
                                 ))}
                             </div>

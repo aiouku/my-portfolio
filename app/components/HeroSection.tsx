@@ -74,15 +74,15 @@ export default function HeroSection() {
 
                 {/* ASCII Name Animation */}
                 <div
-                    className={`relative w-full h-[180px] sm:h-[220px] lg:h-[260px] mb-6 transition-all duration-700 delay-150 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                    className={`relative mx-auto -translate-x-1 w-[90vw] sm:w-[85vw] lg:w-[80vw] max-w-6xl h-[180px] sm:h-[220px] lg:h-[260px] mb-6 transition-all duration-700 delay-150 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-0 opacity-0"
                         }`}
                 >
                     <ASCIIText
-                        text="aiouku"
+                        text="Kei Tanaka"
                         enableWaves={true}
                         asciiFontSize={7}
-                        textFontSize={160}
-                        planeBaseHeight={8}
+                        textFontSize={150}
+                        planeBaseHeight={10}
                         textColor="#00f5ff"
                     />
                 </div>

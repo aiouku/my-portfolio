@@ -50,7 +50,7 @@ export default function Navbar() {
                     href="#home"
                     className="group relative text-2xl font-bold tracking-tight"
                 >
-                    <span className="gradient-text">aiouku</span>
+                    <span className="gradient-text">Kei Tanaka</span>
                     <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-cyan-400 transition-all duration-300 group-hover:w-full" />
                 </a>
 

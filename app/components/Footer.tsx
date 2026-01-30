@@ -1,5 +1,5 @@
 "use client";
-
+//下の方やつ
 export default function Footer() {
     const currentYear = new Date().getFullYear();
 
@@ -12,7 +12,7 @@ export default function Footer() {
     ];
 
     const socialLinks = [
-        { label: "GitHub", href: "https://github.com/" },
+        { label: "GitHub", href: "https://github.com/aiouku" },
         { label: "Twitter", href: "https://twitter.com/" },
         { label: "LinkedIn", href: "https://linkedin.com/" },
     ];
@@ -27,7 +27,7 @@ export default function Footer() {
                     {/* Brand */}
                     <div>
                         <a href="#home" className="inline-block text-2xl font-bold">
-                            <span className="gradient-text">aiouku</span>
+                            <span className="gradient-text">Kei Tanaka</span>
                         </a>
                         <p className="mt-4 text-sm leading-relaxed text-zinc-400">
                             Building interactive experiences and web apps.
