@@ -10,20 +10,27 @@
   --foreground: #ededed;
   --accent-cyan: #00f5ff;
   --accent-cyan-dim: #00c4cc;
-  
+  --accent-rgb: 0, 245, 255;
+
+  /* Tailwind cyan token overrides (default = cyan) */
+  --color-cyan-300: oklch(0.865 0.127 207.08);
+  --color-cyan-400: oklch(0.789 0.154 211.53);
+  --color-cyan-500: oklch(0.715 0.143 215.22);
+
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, var(--accent-cyan), var(--accent-cyan-dim));
   --gradient-glow: linear-gradient(135deg, var(--accent-cyan), var(--accent-cyan-dim));
   --gradient-card: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-  
+
   /* Glass Effect */
   --glass-bg: rgba(15, 15, 25, 0.7);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-blur: 20px;
-  
+
   /* Shadows */
-  --shadow-glow-cyan: 0 0 30px rgba(0, 245, 255, 0.3);
+  --shadow-glow-cyan: 0 0 30px rgba(var(--accent-rgb), 0.3);
 }
+
 
 @theme inline {
   --color-background: var(--background);
@@ -47,11 +54,11 @@
 
 @keyframes pulse-glow {
   0%, 100% { 
-    box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+    box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.3);
     opacity: 0.8;
   }
   50% { 
-    box-shadow: 0 0 40px rgba(0, 245, 255, 0.5);
+    box-shadow: 0 0 40px rgba(var(--accent-rgb), 0.5);
     opacity: 1;
   }
 }
@@ -154,8 +161,8 @@
 }
 
 .glass-card:hover {
-  border-color: rgba(0, 245, 255, 0.3);
-  box-shadow: 0 0 30px rgba(0, 245, 255, 0.1);
+  border-color: rgba(var(--accent-rgb), 0.3);
+  box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.1);
   transform: translateY(-4px);
 }
 
@@ -169,11 +176,11 @@
 
 /* Glow Effects */
 .glow-cyan {
-  box-shadow: 0 0 30px rgba(0, 245, 255, 0.4);
+  box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.4);
 }
 
 .text-glow-cyan {
-  text-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
+  text-shadow: 0 0 20px rgba(var(--accent-rgb), 0.5);
 }
 
 /* Animated Button */
@@ -196,7 +203,7 @@
 }
 
 .btn-glow:hover {
-  box-shadow: 0 0 40px rgba(0, 245, 255, 0.5);
+  box-shadow: 0 0 40px rgba(var(--accent-rgb), 0.5);
   transform: translateY(-2px);
 }
 
@@ -317,6 +324,6 @@ body {
 
 /* Selection */
 ::selection {
-  background: rgba(0, 245, 255, 0.3);
+  background: rgba(var(--accent-rgb), 0.3);
   color: white;
 }

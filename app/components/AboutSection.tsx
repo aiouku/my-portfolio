@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 import { journeyData } from "../lib/journeyData";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function AboutSection() {
     const [ref, isVisible] = useScrollAnimation<HTMLElement>({ threshold: 0.1 });
+    const { t } = useLanguage();
 
     return (
         <section
@@ -16,54 +18,46 @@ export default function AboutSection() {
             <div className="mx-auto max-w-6xl">
                 {/* Section Header */}
                 <div
-                    className={`mb-16 text-center transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-                        }`}
+                    className={`mb-16 text-center transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
                 >
                     <span className="mb-4 inline-block rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-300">
-                        About Me
+                        {t.about.badge}
                     </span>
                     <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                        Crafting <span className="gradient-text">Digital Experiences</span>
+                        {t.about.heading1} <span className="gradient-text">{t.about.heading2}</span>
                     </h2>
                 </div>
 
                 <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
                     {/* Left: Profile Image & Bio */}
                     <div
-                        className={`transition-all duration-700 delay-200 ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
-                            }`}
+                        className={`transition-all duration-700 delay-200 ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"}`}
                     >
                         {/* Animated Profile Container */}
                         <div className="relative mb-8 inline-block">
                             <div className="animate-spin-slow absolute -inset-1 rounded-3xl bg-cyan-500 opacity-50 blur-lg" />
                             <div className="animate-morph relative h-64 w-64 overflow-hidden bg-gradient-to-br from-zinc-800 to-zinc-900 sm:h-80 sm:w-80">
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="text-6xl">👨‍💻</span>
-                                </div>
+                                <img
+                                    src="/images/me.png"
+                                    alt="Kei Tanaka"
+                                    className="h-full w-full object-cover"
+                                />
                             </div>
                         </div>
 
                         <h3 className="mb-4 text-2xl font-semibold">
-                            Hello! I'm <span className="text-cyan-400">Kei Tanaka</span>
+                            {t.about.hello} <span className="text-cyan-400">Kei Tanaka</span>
                         </h3>
                         <p className="mb-4 leading-relaxed text-zinc-400">
-                            I'm a Computer Science student at Waseda University, passionate about
-                            building interactive experiences. I started programming at 14 and
-                            have been exploring game dev, web apps, and creative coding ever since.
+                            {t.about.bio1}
                         </p>
                         <p className="mb-6 leading-relaxed text-zinc-400">
-                            Currently working at Life is Tech!, inspiring the next generation of
-                            developers. I love hackathons, rapid prototyping, and turning ideas
-                            into reality through code.
+                            {t.about.bio2}
                         </p>
 
                         {/* Stats */}
                         <div className="grid grid-cols-3 gap-4">
-                            {[
-                                { value: "5+", label: "Years Coding" },
-                                { value: "🏆", label: "Hackathon Win" },
-                                { value: "∞", label: "Curiosity" },
-                            ].map((stat) => (
+                            {t.about.stats.map((stat) => (
                                 <div
                                     key={stat.label}
                                     className="glass-card rounded-2xl p-4 text-center"
@@ -77,76 +71,59 @@ export default function AboutSection() {
 
                     {/* Right: Timeline */}
                     <div
-                        className={`transition-all duration-700 delay-400 ${isVisible ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
-                            }`}
+                        className={`transition-all duration-700 delay-400 ${isVisible ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"}`}
                     >
-                        <h3 className="mb-8 text-2xl font-semibold">My Journey</h3>
+                        <h3 className="mb-8 text-2xl font-semibold">{t.about.myJourney}</h3>
                         <div className="relative">
                             {/* Timeline Line */}
                             <div className="absolute left-4 top-0 h-full w-0.5 bg-cyan-500" />
 
                             {/* Timeline Items */}
                             <div className="space-y-8">
-                                {journeyData.map((item, index) => (
-                                    <div
-                                        key={item.id}
-                                        className={`relative pl-12 transition-all duration-500 ${isVisible
-                                            ? "translate-y-0 opacity-100"
-                                            : "translate-y-4 opacity-0"
-                                            }`}
-                                        style={{ transitionDelay: `${600 + index * 150}ms` }}
-                                    >
-                                        {/* Dot */}
-                                        <div className="absolute left-2 top-1.5 h-4 w-4 rounded-full border-2 border-cyan-400 bg-zinc-900">
-                                            <div className="absolute inset-1 animate-pulse rounded-full bg-cyan-400" />
-                                        </div>
-
-                                        {/* Content */}
-                                        <Link
-                                            href={`/journey/${item.slug}`}
-                                            className="glass-card block rounded-2xl p-5 transition-all duration-300 hover:border-cyan-500/50 hover:shadow-[0_0_20px_rgba(0,245,255,0.15)]"
+                                {journeyData.map((item, index) => {
+                                    const translated = t.journey.items[item.slug as keyof typeof t.journey.items];
+                                    return (
+                                        <div
+                                            key={item.id}
+                                            className={`relative pl-12 transition-all duration-500 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+                                            style={{ transitionDelay: `${600 + index * 150}ms` }}
                                         >
-                                            <div className="mb-2 flex items-center gap-3">
-                                                <span className="rounded-full bg-cyan-500/20 px-3 py-1 text-xs font-medium text-cyan-300">
-                                                    {item.year}
-                                                </span>
-                                                <span className="text-xs text-zinc-500 capitalize">
-                                                    {item.type}
-                                                </span>
-                                                <svg
-                                                    className="ml-auto h-4 w-4 text-zinc-500 transition-transform group-hover:translate-x-1"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth={2}
-                                                        d="M9 5l7 7-7 7"
-                                                    />
-                                                </svg>
+                                            {/* Dot */}
+                                            <div className="absolute left-2 top-1.5 h-4 w-4 rounded-full border-2 border-cyan-400 bg-zinc-900">
+                                                <div className="absolute inset-1 animate-pulse rounded-full bg-cyan-400" />
                                             </div>
-                                            <h4 className="mb-1 font-semibold text-white">{item.title}</h4>
-                                            <p className="text-sm text-zinc-400">{item.description}</p>
-                                        </Link>
-                                    </div>
-                                ))}
+
+                                            {/* Content */}
+                                            <Link
+                                                href={`/journey/${item.slug}`}
+                                                className="glass-card block rounded-2xl p-5 transition-all duration-300 hover:border-cyan-500/50 hover:shadow-[0_0_20px_rgba(0,245,255,0.15)]"
+                                            >
+                                                <div className="mb-2 flex items-center gap-3">
+                                                    <span className="rounded-full bg-cyan-500/20 px-3 py-1 text-xs font-medium text-cyan-300">
+                                                        {item.year}
+                                                    </span>
+                                                    <span className="text-xs text-zinc-500 capitalize">
+                                                        {item.type}
+                                                    </span>
+                                                    <svg
+                                                        className="ml-auto h-4 w-4 text-zinc-500 transition-transform group-hover:translate-x-1"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke="currentColor"
+                                                    >
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                                <h4 className="mb-1 font-semibold text-white">{translated?.title ?? item.title}</h4>
+                                                <p className="text-sm text-zinc-400">{translated?.description ?? item.description}</p>
+                                            </Link>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
 
-                        {/* Download Resume */}
-                        <div className="mt-10">
-                            <a
-                                href="#"
-                                className="btn-glow inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-zinc-900"
-                            >
-                                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                </svg>
-                                Download Resume
-                            </a>
-                        </div>
+                        {/* Download Resume - hidden for now */}
                     </div>
                 </div>
             </div>

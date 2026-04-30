@@ -2,8 +2,9 @@
 
 import { useTypingEffect, useScrollAnimation } from "../hooks/useScrollAnimation";
 import dynamic from "next/dynamic";
+import { useLanguage } from "../context/LanguageContext";
+import { useTheme } from "../context/ThemeContext";
 
-// Dynamically import ASCIIText to avoid SSR issues with Three.js
 const ASCIIText = dynamic(() => import("./ASCIIText"), { ssr: false });
 
 const socialLinks = [
@@ -16,33 +17,30 @@ const socialLinks = [
             </svg>
         ),
     },
-    {
-        name: "Twitter",
-        href: "https://twitter.com/",
-        icon: (
-            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-            </svg>
-        ),
-    },
-    {
-        name: "LinkedIn",
-        href: "https://linkedin.com/",
-        icon: (
-            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-            </svg>
-        ),
-    },
+    // {
+    //     name: "Twitter",
+    //     href: "https://twitter.com/",
+    //     icon: (
+    //         <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+    //             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    //         </svg>
+    //     ),
+    // },
+    // {
+    //     name: "LinkedIn",
+    //     href: "https://linkedin.com/",
+    //     icon: (
+    //         <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+    //             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    //         </svg>
+    //     ),
+    // },
 ];
 
-
 export default function HeroSection() {
-    const typedText = useTypingEffect(
-        "Student Developer • Unity / Web / Python",
-        40,
-        800
-    );
+    const { t } = useLanguage();
+    const { accentColor } = useTheme();
+    const typedText = useTypingEffect(t.hero.typing, 40, 800);
     const [ref, isVisible] = useScrollAnimation<HTMLElement>({ threshold: 0.2 });
 
     return (
@@ -54,28 +52,25 @@ export default function HeroSection() {
             <div className="relative z-10 mx-auto max-w-5xl text-center">
                 {/* Badge */}
                 <div
-                    className={`mb-8 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-2 text-sm text-cyan-300 transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"
-                        }`}
+                    className={`mb-8 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-2 text-sm text-cyan-300 transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"}`}
                 >
                     <span className="relative flex h-2 w-2">
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
                         <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-500" />
                     </span>
-                    Available for work
+                    {t.hero.available}
                 </div>
 
                 {/* Intro Text */}
                 <p
-                    className={`mb-2 text-2xl font-medium text-zinc-300 sm:text-3xl transition-all duration-700 delay-100 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-                        }`}
+                    className={`mb-2 text-2xl font-medium text-zinc-300 sm:text-3xl transition-all duration-700 delay-100 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
                 >
-                    Hi, I'm
+                    {t.hero.hi}
                 </p>
 
                 {/* ASCII Name Animation */}
                 <div
-                    className={`relative mx-auto -translate-x-1 w-[90vw] sm:w-[85vw] lg:w-[80vw] max-w-6xl h-[180px] sm:h-[220px] lg:h-[260px] mb-6 transition-all duration-700 delay-150 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-0 opacity-0"
-                        }`}
+                    className={`relative mx-auto -translate-x-1 w-[90vw] sm:w-[85vw] lg:w-[80vw] max-w-6xl h-[180px] sm:h-[220px] lg:h-[260px] mb-6 transition-all duration-700 delay-150 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-0 opacity-0"}`}
                 >
                     <ASCIIText
                         text="Kei Tanaka"
@@ -83,14 +78,13 @@ export default function HeroSection() {
                         asciiFontSize={7}
                         textFontSize={150}
                         planeBaseHeight={10}
-                        textColor="#00f5ff"
+                        textColor={accentColor}
                     />
                 </div>
 
                 {/* Typing Subtitle */}
                 <div
-                    className={`mb-6 h-8 text-xl text-zinc-400 sm:text-2xl transition-all duration-700 delay-200 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-                        }`}
+                    className={`mb-6 h-8 text-xl text-zinc-400 sm:text-2xl transition-all duration-700 delay-200 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
                 >
                     <span>{typedText}</span>
                     <span className="ml-1 inline-block h-6 w-0.5 animate-pulse bg-cyan-400" />
@@ -98,23 +92,20 @@ export default function HeroSection() {
 
                 {/* Bio */}
                 <p
-                    className={`mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-zinc-400 transition-all duration-700 delay-300 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-                        }`}
+                    className={`mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-zinc-400 transition-all duration-700 delay-300 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
                 >
-                    I build interactive experiences and web apps. I like making prototypes fast
-                    and polishing UX. Currently focused on creating delightful digital experiences.
+                    {t.hero.bio}
                 </p>
 
                 {/* CTA Buttons */}
                 <div
-                    className={`mb-12 flex flex-wrap items-center justify-center gap-4 transition-all duration-700 delay-400 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-                        }`}
+                    className={`mb-12 flex flex-wrap items-center justify-center gap-4 transition-all duration-700 delay-400 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
                 >
                     <a
                         href="#projects"
                         className="btn-glow group inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-semibold text-zinc-900"
                     >
-                        View My Work
+                        {t.hero.viewWork}
                         <svg
                             className="h-4 w-4 transition-transform group-hover:translate-x-1"
                             fill="none"
@@ -128,14 +119,13 @@ export default function HeroSection() {
                         href="#contact"
                         className="glass-card inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-semibold text-white"
                     >
-                        Let's Talk
+                        {t.hero.letsTalk}
                     </a>
                 </div>
 
                 {/* Social Links */}
                 <div
-                    className={`mb-16 flex items-center justify-center gap-4 transition-all duration-700 delay-500 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-                        }`}
+                    className={`mb-16 flex items-center justify-center gap-4 transition-all duration-700 delay-500 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
                 >
                     {socialLinks.map((link) => (
                         <a
@@ -155,7 +145,7 @@ export default function HeroSection() {
             {/* Scroll Indicator */}
             <div className="absolute bottom-1 left-1/2 -translate-x-1/2">
                 <div className="flex flex-col items-center gap-2">
-                    <span className="text-xs text-zinc-500">Scroll</span>
+                    <span className="text-xs text-zinc-500">{t.hero.scroll}</span>
                     <div className="flex h-10 w-6 items-start justify-center rounded-full border border-zinc-700 p-2">
                         <div className="h-2 w-1 animate-bounce rounded-full bg-cyan-400" />
                     </div>

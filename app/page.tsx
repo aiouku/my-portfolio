@@ -6,6 +6,7 @@ import ProjectsSection from "./components/ProjectsSection";
 import SkillsSection from "./components/SkillsSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
+import ThemeSwitcher from "./components/ThemeSwitcher";
 
 export default function Home() {
   return (
@@ -21,10 +22,11 @@ export default function Home() {
         <HeroSection />
         <AboutSection />
         <ProjectsSection />
-        <SkillsSection />
+        {/* <SkillsSection /> */}
         <ContactSection />
         <Footer />
       </div>
+      <ThemeSwitcher />
     </main>
   );
 }

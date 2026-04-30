@@ -26,7 +26,8 @@ This role has taught me the importance of clear communication and breaking down 
             "Teaching web development and Unity",
             "Mentoring 20+ students",
             "Developing curriculum materials"
-        ]
+        ],
+        image: "/images/LitCampspr.jpg"
     },
     {
         id: 2,

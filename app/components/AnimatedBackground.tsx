@@ -1,17 +1,19 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useTheme, hexToWaveColor } from "../context/ThemeContext";
 
-// Dynamically import Dither to avoid SSR issues with Three.js
 const Dither = dynamic(() => import("./Dither"), { ssr: false });
 
 export default function AnimatedBackground() {
+    const { accentColor } = useTheme();
+
     return (
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
             {/* Dither Background Effect */}
             <div className="absolute inset-0 pointer-events-auto opacity-40">
                 <Dither
-                    waveColor={[0.0, 0.3, 0.35]}
+                    waveColor={hexToWaveColor(accentColor)}
                     disableAnimation={false}
                     enableMouseInteraction={true}
                     mouseRadius={0.3}
@@ -44,4 +46,3 @@ export default function AnimatedBackground() {
         </div>
     );
 }
-

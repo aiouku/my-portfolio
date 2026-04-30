@@ -1,14 +1,17 @@
 "use client";
-//下の方やつ
+
+import { useLanguage } from "../context/LanguageContext";
+
 export default function Footer() {
     const currentYear = new Date().getFullYear();
+    const { t } = useLanguage();
 
     const quickLinks = [
-        { label: "Home", href: "#home" },
-        { label: "About", href: "#about" },
-        { label: "Projects", href: "#projects" },
-        { label: "Skills", href: "#skills" },
-        { label: "Contact", href: "#contact" },
+        { label: t.nav.home, href: "#home" },
+        { label: t.nav.about, href: "#about" },
+        { label: t.nav.projects, href: "#projects" },
+        { label: t.nav.skills, href: "#skills" },
+        { label: t.nav.contact, href: "#contact" },
     ];
 
     const socialLinks = [
@@ -19,7 +22,6 @@ export default function Footer() {
 
     return (
         <footer className="relative border-t border-zinc-800 py-16 px-6">
-            {/* Gradient Line */}
             <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
 
             <div className="mx-auto max-w-6xl">
@@ -30,23 +32,19 @@ export default function Footer() {
                             <span className="gradient-text">Kei Tanaka</span>
                         </a>
                         <p className="mt-4 text-sm leading-relaxed text-zinc-400">
-                            Building interactive experiences and web apps.
-                            Always learning, always creating.
+                            {t.footer.tagline}
                         </p>
                     </div>
 
                     {/* Quick Links */}
                     <div>
                         <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-zinc-300">
-                            Quick Links
+                            {t.footer.quickLinks}
                         </h4>
                         <ul className="space-y-2">
                             {quickLinks.map((link) => (
-                                <li key={link.label}>
-                                    <a
-                                        href={link.href}
-                                        className="text-sm text-zinc-400 transition-colors hover:text-cyan-400"
-                                    >
+                                <li key={link.href}>
+                                    <a href={link.href} className="text-sm text-zinc-400 transition-colors hover:text-cyan-400">
                                         {link.label}
                                     </a>
                                 </li>
@@ -57,7 +55,7 @@ export default function Footer() {
                     {/* Social */}
                     <div>
                         <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-zinc-300">
-                            Connect
+                            {t.footer.connect}
                         </h4>
                         <ul className="space-y-2">
                             {socialLinks.map((link) => (
@@ -79,10 +77,10 @@ export default function Footer() {
                 {/* Copyright */}
                 <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-zinc-800 pt-8 sm:flex-row">
                     <p className="text-sm text-zinc-500">
-                        © {currentYear} aiouku. All rights reserved.
+                        {t.footer.copyright(currentYear)}
                     </p>
                     <p className="text-sm text-zinc-500">
-                        Built with{" "}
+                        {t.footer.builtWith}{" "}
                         <span className="text-cyan-400">Next.js</span>
                         {" "}& {" "}
                         <span className="text-cyan-400">Tailwind CSS</span>
