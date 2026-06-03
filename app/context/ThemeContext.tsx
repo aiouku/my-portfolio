@@ -64,7 +64,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const [accentColor, setAccentColorState] = useState(DEFAULT_COLOR);
 
     useEffect(() => {
-        const saved = localStorage.getItem("accent-color") ?? DEFAULT_COLOR;
+        const isMono = localStorage.getItem("mono-mode") === "true";
+        const saved = isMono ? "#ffffff" : (localStorage.getItem("accent-color") ?? DEFAULT_COLOR);
         setAccentColorState(saved);
         applyAccentColor(saved);
     }, []);

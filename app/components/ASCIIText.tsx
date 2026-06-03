@@ -549,7 +549,13 @@ export default function ASCIIText({
             ro.disconnect();
             asciiRef.current?.dispose();
         };
-    }, [text, asciiFontSize, textFontSize, textColor, planeBaseHeight, enableWaves]);
+    }, [text, asciiFontSize, textFontSize, planeBaseHeight, enableWaves]);
+
+    useEffect(() => {
+        if (asciiRef.current) {
+            asciiRef.current.textCanvas.color = textColor;
+        }
+    }, [textColor]);
 
     return (
         <div

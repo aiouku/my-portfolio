@@ -13,28 +13,25 @@ export default function AboutSection() {
         <section
             id="about"
             ref={ref}
-            className="relative py-32 px-6"
+            className="relative py-32"
         >
-            <div className="mx-auto max-w-6xl">
-                {/* Section Header */}
-                <div
-                    className={`mb-16 text-center transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
-                >
-                    <span className="mb-4 inline-block rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-300">
-                        {t.about.badge}
-                    </span>
-                    <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                        {t.about.heading1} <span className="gradient-text">{t.about.heading2}</span>
-                    </h2>
-                </div>
+            {/* Section Header — full-width, flush left */}
+            <div
+                className={`mb-[150px] pl-6 transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
+            >
+                <h2 className="text-[3.5rem] font-bold leading-none tracking-tight sm:text-[5rem] lg:text-[7rem]">
+                    {t.about.heading1} <span className="gradient-text">{t.about.heading2}</span>
+                </h2>
+            </div>
 
+            <div className="mx-auto max-w-6xl px-6">
                 <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
                     {/* Left: Profile Image & Bio */}
                     <div
                         className={`transition-all duration-700 delay-200 ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"}`}
                     >
                         {/* Animated Profile Container */}
-                        <div className="relative mb-8 inline-block">
+                        <div className="relative mb-8 mt-[100px] inline-block">
                             <div className="animate-spin-slow absolute -inset-1 rounded-3xl bg-cyan-500 opacity-50 blur-lg" />
                             <div className="animate-morph relative h-64 w-64 overflow-hidden bg-gradient-to-br from-zinc-800 to-zinc-900 sm:h-80 sm:w-80">
                                 <img
@@ -45,7 +42,7 @@ export default function AboutSection() {
                             </div>
                         </div>
 
-                        <h3 className="mb-4 text-2xl font-semibold">
+                        <h3 className="mb-4 text-5xl font-semibold leading-tight">
                             {t.about.hello} <span className="text-cyan-400">Kei Tanaka</span>
                         </h3>
                         <p className="mb-4 leading-relaxed text-zinc-400">
@@ -54,19 +51,6 @@ export default function AboutSection() {
                         <p className="mb-6 leading-relaxed text-zinc-400">
                             {t.about.bio2}
                         </p>
-
-                        {/* Stats */}
-                        <div className="grid grid-cols-3 gap-4">
-                            {t.about.stats.map((stat) => (
-                                <div
-                                    key={stat.label}
-                                    className="glass-card rounded-2xl p-4 text-center"
-                                >
-                                    <div className="gradient-text text-2xl font-bold">{stat.value}</div>
-                                    <div className="text-sm text-zinc-400">{stat.label}</div>
-                                </div>
-                            ))}
-                        </div>
                     </div>
 
                     {/* Right: Timeline */}

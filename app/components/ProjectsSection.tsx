@@ -1,26 +1,114 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 import { useLanguage } from "../context/LanguageContext";
 
 const projects = [
-    { id: 5, title: "Prompt-Master", image: "/images/projects/promptmaster.png", tech: ["Flutter", "Dart", "AI API"], category: "mobile", link: "https://little-monsters-877c0.web.app/", featured: true },
-    { id: 6, title: "Keity's Pick", image: "/images/projects/keityspick.png", tech: ["HTML", "CSS", "JavaScript", "Figma"], category: "web", link: "https://keityspick.com/", featured: false },
-    { id: 2, title: "Unity Game Prototype", image: "/images/projects/unity-game.png", tech: ["Unity", "C#", "Shader Graph"], category: "game", link: "https://unityroom.com/games/fivesecondsalpha", featured: true },
-    { id: 7, title: "Tetris 1v1", image: "/images/projects/tetris.png", tech: ["JavaScript", "WebSocket"], category: "game", link: "https://tetris-1v1.onrender.com/", featured: false },
-    { id: 1, title: "News Podcaster", image: "/images/projects/news-podcaster.png", tech: ["Flutter", "Dart", "Gemini API"], category: "mobile", link: "https://github.com/aiouku/news_podcaster", featured: true },
-    { id: 4, title: "YouTube Analyst", image: "📊", tech: ["Python", "HTML Parsing", "Data Analysis"], category: "tool", link: "https://github.com/aiouku/YoutubeAnalyst", featured: false },
-    { id: 3, title: "Portfolio Website", image: "/images/projects/portfolio.png", tech: ["Next.js", "TypeScript", "Tailwind"], category: "web", link: "https://github.com/aiouku/my-portfolio", featured: false },
+    { id: 8, title: "Pitta", jaTitle: null, image: "/images/projects/pitta.png", tech: ["Next.js", "TypeScript", "Konva"], category: "game", link: "https://pitta-dglo.onrender.com/" },
+    { id: 5, title: "Prompt-Master", jaTitle: null, image: "/images/projects/promptmaster.png", tech: ["Flutter", "Dart", "AI API"], category: "mobile", link: "https://little-monsters-877c0.web.app/" },
+    { id: 6, title: "Keity's Pick", jaTitle: null, image: "/images/projects/keityspick.png", tech: ["HTML", "CSS", "JavaScript", "Figma"], category: "web", link: "https://keityspick.com/" },
+    { id: 2, title: "Five Seconds World", jaTitle: "5秒世界", image: "/images/projects/unity-game.png", tech: ["Unity", "C#", "Shader Graph"], category: "game", link: "https://unityroom.com/games/fivesecondsalpha" },
+    { id: 7, title: "Tetris 1v1", jaTitle: null, image: "/images/projects/tetris.png", tech: ["JavaScript", "WebSocket"], category: "game", link: "https://tetris-1v1.onrender.com/" },
+    { id: 1, title: "News Podcaster", jaTitle: null, image: "/images/projects/news-podcaster.png", tech: ["Flutter", "Dart", "Gemini API"], category: "mobile", link: "https://github.com/aiouku/news_podcaster" },
+    { id: 9, title: "VR Suika Game", jaTitle: "VRスイカゲーム", image: "/images/projects/vr.png", tech: ["Unity", "VR", "Oculus"], category: "game", link: "https://github.com/aiouku/waseda_projectresearch_unity" },
+    { id: 4, title: "YouTube Analyst", jaTitle: null, image: "📊", tech: ["Python", "HTML Parsing", "Data Analysis"], category: "tool", link: "https://github.com/aiouku/YoutubeAnalyst" },
+    { id: 10, title: "Toon Shader", jaTitle: null, image: "/images/projects/toon.png", tech: ["Unity", "Shader Graph", "URP"], category: "tool", link: "https://qiita.com/aiouku/items/1d8c8d279d4ff6181551" },
+    { id: 3, title: "Portfolio Website", jaTitle: null, image: "/images/projects/portfolio.png", tech: ["Next.js", "TypeScript", "Tailwind"], category: "web", link: "https://github.com/aiouku/my-portfolio" },
 ];
 
-function ProjectCard({ project, index, isVisible }: { project: typeof projects[0]; index: number; isVisible: boolean }) {
+type Project = typeof projects[0];
+
+function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
+    const { t, lang } = useLanguage();
+    const desc = t.projects.fullDescriptions[project.id as keyof typeof t.projects.fullDescriptions] ?? "";
+    const title = lang === "ja" && project.jaTitle ? project.jaTitle : project.title;
+
+    useEffect(() => {
+        const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+        document.addEventListener("keydown", onKey);
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.removeEventListener("keydown", onKey);
+            document.body.style.overflow = "";
+        };
+    }, [onClose]);
+
+    return (
+        <div
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+            onClick={onClose}
+        >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+
+            {/* Panel */}
+            <div
+                className="relative z-10 w-full max-w-2xl overflow-hidden rounded-3xl border border-zinc-700/50 bg-zinc-900/95 shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+            >
+                {/* Image */}
+                <div className="relative h-64 overflow-hidden bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
+                    {project.image.startsWith("/") ? (
+                        <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
+                    ) : (
+                        <span className="text-8xl">{project.image}</span>
+                    )}
+                    {/* Close button */}
+                    <button
+                        onClick={onClose}
+                        className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/80"
+                        aria-label="Close"
+                    >
+                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                {/* Content */}
+                <div className="p-8">
+                    <h3 className="mb-3 text-2xl font-bold text-white">{title}</h3>
+                    <p className="mb-6 leading-relaxed text-zinc-400">{desc}</p>
+
+                    {/* Tech */}
+                    <div className="mb-8 flex flex-wrap gap-2">
+                        {project.tech.map((tech) => (
+                            <span
+                                key={tech}
+                                className="rounded-full border border-zinc-700/50 bg-zinc-800/50 px-3 py-1 text-sm text-zinc-300"
+                            >
+                                {tech}
+                            </span>
+                        ))}
+                    </div>
+
+                    {/* Link */}
+                    <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-glow inline-flex items-center gap-2 rounded-full px-8 py-3 text-sm font-semibold text-zinc-900"
+                    >
+                        {t.projects.viewProject}
+                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function ProjectCard({ project, index, isVisible, onClick }: { project: Project; index: number; isVisible: boolean; onClick: () => void }) {
     const cardRef = useRef<HTMLDivElement>(null);
     const [tilt, setTilt] = useState({ x: 0, y: 0 });
     const [isHovered, setIsHovered] = useState(false);
-    const { t } = useLanguage();
+    const { t, lang } = useLanguage();
 
     const desc = t.projects.descriptions[project.id as keyof typeof t.projects.descriptions] ?? "";
+    const title = lang === "ja" && project.jaTitle ? project.jaTitle : project.title;
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         if (!cardRef.current) return;
@@ -38,10 +126,11 @@ function ProjectCard({ project, index, isVisible }: { project: typeof projects[0
     return (
         <div
             ref={cardRef}
+            onClick={onClick}
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={handleMouseLeave}
-            className={`group relative transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"}`}
+            className={`group relative cursor-pointer transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"}`}
             style={{
                 transitionDelay: `${index * 100}ms`,
                 transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) ${isVisible ? "translateY(0)" : "translateY(48px)"}`,
@@ -50,8 +139,8 @@ function ProjectCard({ project, index, isVisible }: { project: typeof projects[0
             <div className={`absolute -inset-0.5 rounded-3xl bg-cyan-500 opacity-0 blur transition-opacity duration-500 ${isHovered ? "opacity-50" : ""}`} />
 
             <article className="glass-card relative flex h-full flex-col overflow-hidden rounded-3xl">
-                <div className="relative h-48 overflow-hidden bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 flex items-center justify-center">
-                    {project.image.startsWith('/') ? (
+                <div className="relative h-56 overflow-hidden bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 flex items-center justify-center">
+                    {project.image.startsWith("/") ? (
                         <img
                             src={project.image}
                             alt={project.title}
@@ -62,32 +151,13 @@ function ProjectCard({ project, index, isVisible }: { project: typeof projects[0
                             {project.image}
                         </span>
                     )}
-
-                    {project.featured && (
-                        <span className="absolute right-4 top-4 rounded-full bg-cyan-500 px-3 py-1 text-xs font-semibold text-white">
-                            {t.projects.featured}
-                        </span>
-                    )}
-
-                    <div className={`absolute inset-0 flex items-center justify-center bg-zinc-900/80 transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"}`}>
-                        <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn-glow rounded-full px-6 py-3 text-sm font-semibold text-zinc-900"
-                        >
-                            {t.projects.viewProject}
-                        </a>
-                    </div>
                 </div>
 
-                <div className="flex flex-1 flex-col p-6">
-                    <h3 className="mb-2 text-xl font-semibold text-white group-hover:text-cyan-400 transition-colors">
-                        {project.title}
+                <div className="flex flex-1 flex-col p-7">
+                    <h3 className="mb-3 text-[2.1rem] font-semibold leading-tight text-white group-hover:text-cyan-400 transition-colors">
+                        {title}
                     </h3>
-                    <p className="mb-4 flex-1 text-sm leading-relaxed text-zinc-400">
-                        {desc}
-                    </p>
+                    <p className="mb-4 flex-1 text-sm leading-relaxed text-zinc-400">{desc}</p>
 
                     <div className="flex flex-wrap gap-2">
                         {project.tech.map((tech) => (
@@ -108,6 +178,7 @@ function ProjectCard({ project, index, isVisible }: { project: typeof projects[0
 export default function ProjectsSection() {
     const [ref, isVisible] = useScrollAnimation<HTMLElement>({ threshold: 0.1 });
     const [activeCategory, setActiveCategory] = useState("all");
+    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const { t } = useLanguage();
 
     const categories = [
@@ -121,21 +192,15 @@ export default function ProjectsSection() {
     const filtered = activeCategory === "all" ? projects : projects.filter((p) => p.category === activeCategory);
 
     return (
-        <section id="projects" ref={ref} className="relative py-32 px-6">
-            <div className="mx-auto max-w-6xl">
-                {/* Section Header */}
-                <div className={`mb-16 text-center transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
-                    <span className="mb-4 inline-block rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-1.5 text-sm text-violet-300">
-                        {t.projects.badge}
-                    </span>
-                    <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                        {t.projects.heading1} <span className="gradient-text">{t.projects.heading2}</span>
-                    </h2>
-                    <p className="mx-auto mt-4 max-w-2xl text-zinc-400">
-                        {t.projects.description}
-                    </p>
-                </div>
+        <section id="projects" ref={ref} className="relative py-32">
+            {/* Section Header — full-width, flush left */}
+            <div className={`mb-[150px] pl-6 transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
+                <h2 className="text-[3.5rem] font-bold leading-none tracking-tight sm:text-[5rem] lg:text-[7rem]">
+                    {t.projects.heading1} <span className="gradient-text">{t.projects.heading2}</span>
+                </h2>
+            </div>
 
+            <div className="mx-auto max-w-6xl px-6">
                 {/* Category Filter */}
                 <div className={`mb-12 flex flex-wrap justify-center gap-3 transition-all duration-700 delay-200 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
                     {categories.map((cat) => (
@@ -157,6 +222,7 @@ export default function ProjectsSection() {
                             project={project}
                             index={index}
                             isVisible={isVisible}
+                            onClick={() => setSelectedProject(project)}
                         />
                     ))}
                 </div>
@@ -176,6 +242,11 @@ export default function ProjectsSection() {
                     </a>
                 </div>
             </div>
+
+            {/* Modal */}
+            {selectedProject && (
+                <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+            )}
         </section>
     );
 }

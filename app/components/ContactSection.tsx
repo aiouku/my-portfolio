@@ -74,21 +74,15 @@ export default function ContactSection() {
     };
 
     return (
-        <section id="contact" ref={ref} className="relative py-32 px-6">
-            <div className="mx-auto max-w-6xl">
-                {/* Section Header */}
-                <div className={`mb-16 text-center transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
-                    <span className="mb-4 inline-block rounded-full border border-pink-500/30 bg-pink-500/10 px-4 py-1.5 text-sm text-pink-300">
-                        {t.contact.badge}
-                    </span>
-                    <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                        {t.contact.heading1} <span className="gradient-text">{t.contact.heading2}</span>
-                    </h2>
-                    <p className="mx-auto mt-4 max-w-2xl text-zinc-400">
-                        {t.contact.description}
-                    </p>
-                </div>
+        <section id="contact" ref={ref} className="relative py-32">
+            {/* Section Header — full-width, flush left */}
+            <div className={`mb-[150px] pl-6 transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
+                <h2 className="text-[3.5rem] font-bold leading-none tracking-tight sm:text-[5rem] lg:text-[7rem]">
+                    {t.contact.heading1} <span className="gradient-text">{t.contact.heading2}</span>
+                </h2>
+            </div>
 
+            <div className="mx-auto max-w-6xl px-6">
                 <div className="grid gap-12 lg:grid-cols-5">
                     {/* Contact Methods */}
                     <div className={`lg:col-span-2 transition-all duration-700 delay-200 ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"}`}>

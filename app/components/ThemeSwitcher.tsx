@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTheme } from "../context/ThemeContext";
 
 const PRESETS = [
@@ -11,7 +11,6 @@ const PRESETS = [
     "#fb7185",
     "#facc15",
     "#60a5fa",
-    "#f472b6",
 ];
 
 function hslToHex(h: number, s: number, l: number): string {
@@ -46,15 +45,39 @@ export default function ThemeSwitcher() {
     const { accentColor, setAccentColor } = useTheme();
     const [open, setOpen] = useState(false);
     const [hue, setHue] = useState(180);
+    const [isMono, setIsMono] = useState(false);
+    const rafRef = useRef<number | null>(null);
 
     useEffect(() => {
-        setHue(hexToHue(accentColor));
-    }, [accentColor]);
+        if (!isMono) setHue(hexToHue(accentColor));
+    }, [accentColor, isMono]);
+
+    useEffect(() => {
+        setIsMono(localStorage.getItem("mono-mode") === "true");
+    }, []);
+
+    const toggleMono = () => {
+        const next = !isMono;
+        setIsMono(next);
+        localStorage.setItem("mono-mode", String(next));
+        if (next) {
+            localStorage.setItem("pre-mono-color", accentColor);
+            setAccentColor("#ffffff");
+        } else {
+            const restored = localStorage.getItem("pre-mono-color") ?? "#00f5ff";
+            setAccentColor(restored);
+            setHue(hexToHue(restored));
+        }
+    };
 
     const handleHue = (e: React.ChangeEvent<HTMLInputElement>) => {
         const h = Number(e.target.value);
         setHue(h);
-        setAccentColor(hslToHex(h, 100, 65));
+        if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(() => {
+            setAccentColor(hslToHex(h, 100, 65));
+            rafRef.current = null;
+        });
     };
 
     const handlePreset = (color: string) => {
@@ -111,11 +134,11 @@ export default function ThemeSwitcher() {
                         <p className="mb-2 text-xs font-medium uppercase tracking-widest text-zinc-500">Presets</p>
                         <div className="grid grid-cols-4 gap-2">
                             {PRESETS.map((color) => {
-                                const active = accentColor.toLowerCase() === color.toLowerCase();
+                                const active = !isMono && accentColor.toLowerCase() === color.toLowerCase();
                                 return (
                                     <button
                                         key={color}
-                                        onClick={() => handlePreset(color)}
+                                        onClick={() => { if (isMono) toggleMono(); handlePreset(color); }}
                                         className="h-9 w-9 rounded-full transition-all hover:scale-110"
                                         style={{
                                             backgroundColor: color,
@@ -126,6 +149,18 @@ export default function ThemeSwitcher() {
                                     />
                                 );
                             })}
+                            {/* Mono button */}
+                            <button
+                                onClick={toggleMono}
+                                className="h-9 w-9 rounded-full transition-all hover:scale-110 overflow-hidden"
+                                style={{
+                                    background: "linear-gradient(135deg, #000 50%, #fff 50%)",
+                                    outline: isMono ? "2px solid #aaa" : "none",
+                                    outlineOffset: "2px",
+                                    boxShadow: isMono ? "0 0 8px rgba(255,255,255,0.5)" : "none",
+                                }}
+                                aria-label="Monochrome mode"
+                            />
                         </div>
                     </div>
                 )}
