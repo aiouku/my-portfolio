@@ -12,7 +12,7 @@ export const translations = {
             available: "Available for work",
             hi: "Hi, I'm",
             typing: "Student Developer • Unity / Web / Python / Dart",
-            bio: "I build interactive experiences and web apps. I like making prototypes fast and polishing UX. Currently focused on creating delightful digital experiences.",
+            bio: "I build interactive experiences and web apps. I like making prototypes fast and polishing UX. Always building something.",
             viewWork: "View My Work",
             letsTalk: "Let's Talk",
             scroll: "Scroll",
@@ -23,7 +23,7 @@ export const translations = {
             heading2: "Digital Experiences",
             hello: "Hello! I'm",
             bio1: "I'm a Computer Science student at Waseda University, passionate about building interactive experiences. I started programming at 14 and have been exploring game dev, web apps, and creative coding ever since.",
-            bio2: "Currently working at Life is Tech!, inspiring the next generation of developers. I love hackathons, rapid prototyping, and turning ideas into reality through code.",
+            bio2: "Currently working at Life is Tech!, helping students build their first apps. I love hackathons, rapid prototyping, and building things fast.",
             stats: [
                 { value: "6+", label: "Years Coding" },
                 { value: "🏆", label: "Hackathon Win" },
@@ -31,6 +31,13 @@ export const translations = {
             ],
             myJourney: "My Journey",
             downloadResume: "Download Resume",
+            awards: {
+                heading: "Awards",
+                items: [
+                    { event: "GDGoC Hackathon 2026", award: "AI Prize", year: "2026", slug: "gdgoc-hackathon-2026" },
+                    { event: "GDGC Japan Summer Hackathon", award: "Audience Prize", year: "2024", slug: "gdsc-hackathon" },
+                ],
+            },
         },
         projects: {
             badge: "My Work",
@@ -95,7 +102,7 @@ export const translations = {
             badge: "Get In Touch",
             heading1: "Let's",
             heading2: "Connect",
-            description: "Have a project idea or just want to chat? Feel free to reach out. I'm always excited to explore new opportunities.",
+            description: "Have a project idea or just want to chat? Feel free to reach out. Always open to new projects and ideas.",
             contactInfo: "Contact Info",
             available: "Currently available for new projects",
             formHeading: "Send a Message to Kei Tanaka",
@@ -119,18 +126,50 @@ export const translations = {
             links: "Links",
             backToHome: "Back to Home",
             items: {
+                "thirdscope-intern": {
+                    title: "Interning at ThirdScope",
+                    description: "Joined ThirdScope's Quality Assurance division, working on Katana — an AI business support platform.",
+                    detailedDescription: `In May 2026, I joined ThirdScope as an intern in the Quality Assurance division, working on Katana, an AI-powered platform designed to streamline business operations.
+
+In QA, my work goes beyond testing — I evaluate the product from a user and business perspective, collect feedback, and help figure out what to work on next.
+
+Working on a real product has taught me how software actually gets used.`,
+                    highlights: [
+                        "Joined Quality Assurance division at ThirdScope",
+                        "Contributing to Katana — AI business support platform",
+                        "Evaluating product quality and gathering user feedback",
+                        "Shaping next goals and business direction from insights",
+                    ],
+                    links: [] as { label: string; url: string }[],
+                },
                 "life-is-tech": {
                     title: "Joined Life is Tech!",
                     description: "Started working as a mentor providing IT education to teenagers.",
-                    detailedDescription: `As a mentor at Life is Tech!, I guide middle and high school students through their programming journey. I teach web development, game development with Unity, and help students build their first apps.
+                    detailedDescription: `As a mentor at Life is Tech!, I support middle and high school students as they build their first projects. I teach web development, game development with Unity, and help them go from zero to shipping something real.
 
-This role has taught me the importance of clear communication and breaking down complex concepts. Seeing students go from zero coding experience to building their own projects is incredibly rewarding.`,
+Seeing a student ship their first project is always the best part.`,
                     highlights: [
                         "Teaching web development and Unity",
                         "Mentoring 20+ students",
                         "Developing curriculum materials",
                     ],
                     links: [] as { label: string; url: string }[],
+                },
+                "gdgoc-hackathon-2026": {
+                    title: "Won GDGoC Hackathon 2026",
+                    description: "Won the AI Prize at GDGoC Hackathon 2026 with an AI prompt-engineering education game.",
+                    detailedDescription: `At GDGoC Hackathon 2026, our team built an educational game designed to help middle and high school students learn prompt engineering in a fun, interactive way.
+
+Players are given a product brief and must write prompts that guide an AI to reproduce it as closely as possible. The game scores fidelity, encourages iteration, and provides feedback loops so students can improve their prompting skills naturally.
+
+We won the AI Prize for creative use of AI in education.`,
+                    highlights: [
+                        "Won AI Prize at GDGoC Hackathon 2026",
+                        "Built AI prompt-engineering education game",
+                        "Targeted at middle and high school students",
+                        "Designed feedback loop for iterative learning",
+                    ],
+                    links: [{ label: "Project GitHub", url: "https://github.com/aiouku/prompt-game" }],
                 },
                 "gdsc-hackathon": {
                     title: "Won GDSC Hackathon",
@@ -139,7 +178,7 @@ This role has taught me the importance of clear communication and breaking down 
 
 The app uses natural language processing to summarize articles and text-to-speech to create audio content. Users can customize the voice, pace, and length of their news podcasts.
 
-We won the Audience Prize, voted by fellow hackers and attendees, which was an amazing validation of our idea and execution.`,
+We won the Audience Prize, voted by fellow hackers and attendees — which felt great.`,
                     highlights: [
                         "Built AI-powered news-to-podcast converter",
                         "48-hour hackathon sprint",
@@ -150,9 +189,9 @@ We won the Audience Prize, voted by fellow hackers and attendees, which was an a
                 "waseda-university": {
                     title: "Entered Waseda University",
                     description: "Started studying Computer Science at Waseda University.",
-                    detailedDescription: `I began my undergraduate studies in Computer Science at Waseda University, one of Japan's leading private universities.
+                    detailedDescription: `I'm studying Computer Science at Waseda University in Japan.
 
-My coursework covers algorithms, data structures, computer architecture, and software engineering. Outside of classes, I'm actively involved in programming competitions and tech communities on campus.`,
+My coursework covers algorithms, data structures, computer architecture, and software engineering. Outside class, I join programming contests and hang out in tech communities on campus.`,
                     highlights: [
                         "Computer Science major",
                         "Active in tech communities",
@@ -165,9 +204,9 @@ My coursework covers algorithms, data structures, computer architecture, and sof
                     description: "Began my coding journey at age 14, learning Python and building tools for games.",
                     detailedDescription: `At 14, I wrote my first lines of code in Python. It started with simple scripts to automate repetitive tasks in games I played.
 
-From there, I discovered the joy of building things from scratch. I moved on to web development, game development with Unity, and eventually fell in love with creating interactive experiences.
+From there, I got into building things from scratch — web stuff, Unity games, whatever looked interesting.
 
-This was the beginning of a journey that would define my career path and passion.`,
+That's where it all started.`,
                     highlights: [
                         "First language: Python",
                         "Built game automation tools",
@@ -210,11 +249,18 @@ This was the beginning of a journey that would define my career path and passion
             ],
             myJourney: "経歴",
             downloadResume: "履歴書をダウンロード",
+            awards: {
+                heading: "受賞歴",
+                items: [
+                    { event: "GDGoC Hackathon 2026", award: "AI賞", year: "2026", slug: "gdgoc-hackathon-2026" },
+                    { event: "GDGC Japan Summer Hackathon", award: "オーディエンス賞", year: "2024", slug: "gdsc-hackathon" },
+                ],
+            },
         },
         projects: {
             badge: "作品",
-            heading1: "注目の",
-            heading2: "プロジェクト",
+            heading1: "これまでの",
+            heading2: "作品",
             description: "ゲームからWebアプリまで、私が制作したプロジェクト集です。現在進行形でさまざまなアプリ、プロダクトを開発しています。",
             categories: {
                 all: "All",
@@ -272,8 +318,8 @@ This was the beginning of a journey that would define my career path and passion
         },
         contact: {
             badge: "お問い合わせ",
-            heading1: "さあ",
-            heading2: "繋がりましょう",
+            heading1: "連絡は",
+            heading2: "こちら",
             description: "プロジェクトのアイデアがある方も、ただ話したい方も、気軽にご連絡ください。新しい機会にいつでも興味があります。",
             contactInfo: "連絡先",
             available: "新規プロジェクト受付中",
@@ -298,12 +344,28 @@ This was the beginning of a journey that would define my career path and passion
             links: "リンク",
             backToHome: "ホームに戻る",
             items: {
+                "thirdscope-intern": {
+                    title: "サードスコープにてインターン開始",
+                    description: "Quality Assurance部門にて、AI業務支援プラットフォーム「Katana」の開発に携わっています。",
+                    detailedDescription: `2026年5月、サードスコープのQuality Assurance部門にインターンとして参加し、AI業務支援プラットフォーム「Katana」の開発に関わっています。
+
+QAとしての仕事はテストにとどまらず、ユーザー・ビジネス両面からプロダクトを評価し、フィードバックを収集。FBをもとに次の目標や事業の方向性を考えることも担っています。
+
+実際にビジネスで使われているプロダクトに携わることで、ソフトウェアの実務上での運用方法が身についています。`,
+                    highlights: [
+                        "サードスコープのQuality Assurance部門に参加",
+                        "AI業務支援プラットフォーム「Katana」の開発に貢献",
+                        "プロダクト品質の評価とユーザーFBの収集",
+                        "FBをもとに次の目標・事業方向を考える",
+                    ],
+                    links: [] as { label: string; url: string }[],
+                },
                 "life-is-tech": {
                     title: "Life is Tech!で働く",
                     description: "中高生へのIT教育を提供するメンターとして勤務を開始しました。",
-                    detailedDescription: `Life is Tech!のメンターとして、中学・高校生のプログラミングの旅をサポートしています。Web開発やUnityを使ったゲーム開発を教え、生徒が初めてのアプリを作るお手伝いをしています。
+                    detailedDescription: `Life is Tech!のメンターとして、中学・高校生の開発やプロジェクトをサポートしています。Web開発やUnityを使ったゲーム開発を教え、生徒が初めてのアプリを作るお手伝いをしています。
 
-この役割から、明確なコミュニケーションとタスクを分解する重要性を学びました。コーディング経験ゼロの生徒が自分でプロジェクトを作れるようになる姿を見ることで、やりがいを感じております。`,
+メンバーの成功体験や開発をサポートすることが、この仕事の醍醐味です。`,
                     highlights: [
                         "Web開発とUnityを指導",
                         "20名以上の生徒をメンタリング",
@@ -311,14 +373,30 @@ This was the beginning of a journey that would define my career path and passion
                     ],
                     links: [] as { label: string; url: string }[],
                 },
+                "gdgoc-hackathon-2026": {
+                    title: "GDGoC Hackathon 2026",
+                    description: "GDGoC Hackathon 2026でAIプロンプト教育ゲームを制作し、AI賞を受賞しました。",
+                    detailedDescription: `GDGoC Hackathon 2026に、Life is Tech!での同期と出場。ここでは中高生がプロンプトエンジニアリングを楽しく学べる教育ゲームを制作しました。
+
+お題のプロダクトを再現するプロンプトを書き、AIがどれだけ忠実に再現できるかをスコアで競います。フィードバックと再挑戦の機会により、効果的なプロンプトエンジニアリングを自然に習得できます。
+
+AIを教育に活用した独創性が評価され、AI賞を受賞しました。`,
+                    highlights: [
+                        "GDGoC Hackathon 2026 AI賞受賞",
+                        "AIプロンプトエンジニアリング教育ゲームを開発",
+                        "中高生向けに設計",
+                        "反復学習のフィードバックループを設計",
+                    ],
+                    links: [{ label: "プロジェクトGitHub", url: "https://github.com/aiouku/prompt-game" }],
+                },
                 "gdsc-hackathon": {
-                    title: "GDSCハッカソン優勝",
+                    title: "GDSCハッカソン",
                     description: "News PodcasterアプリでGDSC Japan Summer Hackathon 2024のオーディエンス賞を受賞しました。",
                     detailedDescription: `GDSC Japan Summer Hackathonで、チームはNews Podcasterを制作しました。AIを使ってニュース記事をパーソナライズされたポッドキャストエピソードに変換するアプリです。
 
 NLPで記事を要約し、テキスト読み上げで音声コンテンツを生成します。ユーザーは音声、速度、ポッドキャストの長さをカスタマイズできます。
 
-参加者の投票によるオーディエンス賞を受賞し、アイデアと実装の素晴らしい評価を得ました。`,
+参加者の投票によるオーディエンス賞を受賞し、アイデアについて高い評価を得ました。`,
                     highlights: [
                         "AIニュース→ポッドキャスト変換機能の開発",
                         "48時間のハッカソンスプリント",
@@ -329,7 +407,7 @@ NLPで記事を要約し、テキスト読み上げで音声コンテンツを�
                 "waseda-university": {
                     title: "早稲田大学に入学",
                     description: "早稲田大学基幹理工学部情報理工学科に所属しました。",
-                    detailedDescription: `日本トップクラスの私立大学である早稲田大学で情報工学の授業を受けています。
+                    detailedDescription: `日本の早稲田大学で情報工学の授業を受けています。
 
 アルゴリズム、データ構造、コンピュータアーキテクチャ、ソフトウェアエンジニアリングを学んでいます。授業外では、プログラミングコンテストやキャンパス内のテクノロジーコミュニティに積極的に参加しています。`,
                     highlights: [
@@ -346,7 +424,7 @@ NLPで記事を要約し、テキスト読み上げで音声コンテンツを�
 
 そこからDiscordのbotだったり、何かを作ることの楽しさを発見しました。Web開発、Unityを使ったゲーム開発へと進み、デジタルの体験を作ることに夢中になりました。
 
-これがキャリアの方向性と情熱を形作る旅の始まりでした。`,
+この経験を基に現在があります。`,
                     highlights: [
                         "最初の言語：Python",
                         "ゲーム自動化ツールの制作",

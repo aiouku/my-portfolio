@@ -64,7 +64,7 @@ export default function AboutSection() {
 
                             {/* Timeline Items */}
                             <div className="space-y-8">
-                                {journeyData.map((item, index) => {
+                                {journeyData.filter(item => item.showInTimeline !== false).map((item, index) => {
                                     const translated = t.journey.items[item.slug as keyof typeof t.journey.items];
                                     return (
                                         <div
@@ -108,6 +108,31 @@ export default function AboutSection() {
                         </div>
 
                         {/* Download Resume - hidden for now */}
+                    </div>
+                </div>
+
+                {/* Awards */}
+                <div
+                    className={`mt-16 transition-all duration-700 delay-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
+                >
+                    <h3 className="mb-6 text-2xl font-semibold">{t.about.awards.heading}</h3>
+                    <div className="flex flex-wrap gap-4">
+                        {t.about.awards.items.map((item, i) => (
+                            <Link
+                                key={i}
+                                href={`/journey/${item.slug}`}
+                                className="glass-card flex items-center gap-4 rounded-2xl px-6 py-4 transition-all duration-300 hover:border-cyan-500/50 hover:shadow-[0_0_20px_rgba(0,245,255,0.15)]"
+                            >
+                                <span className="text-2xl">🏆</span>
+                                <div>
+                                    <p className="font-semibold text-white">{item.award}</p>
+                                    <p className="text-sm text-zinc-400">{item.event}</p>
+                                </div>
+                                <span className="ml-4 rounded-full bg-cyan-500/20 px-3 py-1 text-xs font-medium text-cyan-300">
+                                    {item.year}
+                                </span>
+                            </Link>
+                        ))}
                     </div>
                 </div>
             </div>

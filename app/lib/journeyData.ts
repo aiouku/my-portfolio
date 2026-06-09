@@ -9,9 +9,29 @@ export interface JourneyItem {
     highlights?: string[];
     links?: { label: string; url: string }[];
     image?: string;
+    showInTimeline?: boolean;
 }
 
 export const journeyData: JourneyItem[] = [
+    {
+        id: 0,
+        slug: "thirdscope-intern",
+        year: "2026",
+        title: "Interning at ThirdScope",
+        description: "Joined ThirdScope as an intern in the Quality Assurance division, contributing to Katana — an AI business support platform.",
+        detailedDescription: `In May 2026, I joined ThirdScope as an intern in the Quality Assurance division, working on Katana, an AI-powered platform designed to streamline business operations.
+
+In QA, my work goes beyond testing — I evaluate the product from a user and business perspective, collect feedback, and help figure out what to work on next.
+
+Working on a real product has taught me how software actually gets used.`,
+        type: "work",
+        highlights: [
+            "Joined Quality Assurance division at ThirdScope",
+            "Contributing to Katana — AI business support platform",
+            "Evaluating product quality and gathering user feedback",
+            "Shaping next goals and business direction from insights"
+        ],
+    },
     {
         id: 1,
         slug: "life-is-tech",
@@ -20,7 +40,7 @@ export const journeyData: JourneyItem[] = [
         description: "Started working as a mentor providing IT education to teenagers.",
         detailedDescription: `As a mentor at Life is Tech!, I guide middle and high school students through their programming journey. I teach web development, game development with Unity, and help students build their first apps.
 
-This role has taught me the importance of clear communication and breaking down complex concepts. Seeing students go from zero coding experience to building their own projects is incredibly rewarding.`,
+Seeing a student ship their first project is always the best part.`,
         type: "work",
         highlights: [
             "Teaching web development and Unity",
@@ -33,7 +53,7 @@ This role has taught me the importance of clear communication and breaking down 
         id: 2,
         slug: "gdsc-hackathon",
         year: "2024",
-        title: "Won GDSC Hackathon",
+        title: "GDSC Hackathon",
         description: "Won the Audience Prize at GDSC Japan Summer Hackathon with News Podcaster app.",
         detailedDescription: `At the GDSC Japan Summer Hackathon, our team built "News Podcaster" - an app that transforms news articles into personalized podcast episodes using AI.
 
@@ -50,10 +70,35 @@ We won the Audience Prize, voted by fellow hackers and attendees, which was an a
         links: [
             { label: "Project GitHub", url: "https://github.com/aiouku/news_podcaster" }
         ],
-        image: "/images/gdsc-hackathon.jpg"
+        image: "/images/gdsc-hackathon.jpg",
+        showInTimeline: false,
     },
     {
         id: 3,
+        slug: "gdgoc-hackathon-2026",
+        year: "2026",
+        title: "GDGoC Hackathon 2026",
+        description: "Won the AI Prize at GDGoC Hackathon 2026 with an AI education game for students.",
+        detailedDescription: `At GDGoC Hackathon 2026, our team built an educational game designed to help middle and high school students learn prompt engineering in a fun, interactive way.
+
+Players are given a product brief and must write prompts that guide an AI to reproduce it as closely as possible. The game scores fidelity, encourages iteration, and provides feedback loops so students can improve their prompting skills naturally.
+
+We won the AI Prize, recognizing the project's creative use of AI for education.`,
+        type: "achievement",
+        highlights: [
+            "Won AI Prize at GDGoC Hackathon 2026",
+            "Built AI prompt-engineering education game",
+            "Targeted at middle and high school students",
+            "Designed feedback loop for iterative learning"
+        ],
+        links: [
+            { label: "Project GitHub", url: "https://github.com/aiouku/prompt-game" }
+        ],
+        image: "/images/projects/promptmaster.png",
+        showInTimeline: false,
+    },
+    {
+        id: 4,
         slug: "waseda-university",
         year: "2024",
         title: "Entered Waseda University",
@@ -69,16 +114,16 @@ My coursework covers algorithms, data structures, computer architecture, and sof
         ]
     },
     {
-        id: 4,
+        id: 5,
         slug: "started-programming",
         year: "2019",
         title: "Started Programming",
         description: "Began my coding journey at age 14, learning Python and building tools for games.",
         detailedDescription: `At 14, I wrote my first lines of code in Python. It started with simple scripts to automate repetitive tasks in games I played.
 
-From there, I discovered the joy of building things from scratch. I moved on to web development, game development with Unity, and eventually fell in love with creating interactive experiences.
+From there, I got into building things from scratch — web stuff, Unity games, whatever looked interesting.
 
-This was the beginning of a journey that would define my career path and passion.`,
+That's where it all started.`,
         type: "milestone",
         highlights: [
             "First language: Python",
