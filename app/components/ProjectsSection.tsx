@@ -6,9 +6,11 @@ import { useLanguage } from "../context/LanguageContext";
 
 const projects = [
     { id: 8, title: "Pitta", jaTitle: null, image: "/images/projects/pitta.png", tech: ["Next.js", "TypeScript", "Konva"], category: "game", link: "https://pitta-dglo.onrender.com/" },
+    { id: 12, title: "Trainly", jaTitle: null, image: "/images/projects/trainly.png", tech: ["SwiftUI", "Gemini API"], category: "mobile", link: "https://github.com/aiouku/Trainly" },
     { id: 5, title: "Prompt-Master", jaTitle: null, image: "/images/projects/promptmaster.png", tech: ["Flutter", "Dart", "AI API"], category: "mobile", link: "https://little-monsters-877c0.web.app/" },
     { id: 6, title: "Keity's Pick", jaTitle: null, image: "/images/projects/keityspick.png", tech: ["HTML", "CSS", "JavaScript", "Figma"], category: "web", link: "https://keityspick.com/" },
     { id: 2, title: "Five Seconds World", jaTitle: "5秒世界", image: "/images/projects/unity-game.png", tech: ["Unity", "C#", "Shader Graph"], category: "game", link: "https://unityroom.com/games/fivesecondsalpha" },
+    { id: 11, title: "Hijack", jaTitle: null, image: "/images/projects/hijack.png", tech: ["Unity", "Shader Graph", "Animation"], category: "game", link: "https://github.com/inf1nitygame/HijackGame" },
     { id: 7, title: "Tetris 1v1", jaTitle: null, image: "/images/projects/tetris.png", tech: ["JavaScript", "WebSocket"], category: "game", link: "https://tetris-1v1.onrender.com/" },
     { id: 1, title: "News Podcaster", jaTitle: null, image: "/images/projects/news-podcaster.png", tech: ["Flutter", "Dart", "Gemini API"], category: "mobile", link: "https://github.com/aiouku/news_podcaster" },
     { id: 9, title: "VR Suika Game", jaTitle: "VRスイカゲーム", image: "/images/projects/vr.png", tech: ["Unity", "VR", "Oculus"], category: "game", link: "https://github.com/aiouku/waseda_projectresearch_unity" },
