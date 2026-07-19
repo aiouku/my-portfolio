@@ -297,6 +297,8 @@ class CanvAscii {
     filter!: AsciiFilter;
     center: { x: number; y: number } = { x: 0, y: 0 };
     animationFrameId: number = 0;
+    planeW: number = 0;
+    planeH: number = 0;
 
     constructor(
         { text, asciiFontSize, textFontSize, textColor, planeBaseHeight, enableWaves }: CanvAsciiOptions,
@@ -343,6 +345,9 @@ class CanvAscii {
         const planeW = baseH * textAspect;
         const planeH = baseH;
 
+        this.planeW = planeW;
+        this.planeH = planeH;
+
         this.geometry = new THREE.PlaneGeometry(planeW, planeH, 36, 36);
         this.material = new THREE.ShaderMaterial({
             vertexShader,
@@ -358,6 +363,25 @@ class CanvAscii {
 
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         this.scene.add(this.mesh);
+
+        this.fitMesh();
+    }
+
+    // Scale the plane so it always fits inside the camera frustum.
+    // Without this the plane keeps its construction size and long strings
+    // (or narrow viewports) get clipped at the left/right edges.
+    fitMesh() {
+        if (!this.mesh || !this.planeW || !this.planeH) return;
+
+        const vFov = (this.camera.fov * Math.PI) / 180;
+        const visibleH = 2 * Math.tan(vFov / 2) * this.camera.position.z;
+        const visibleW = visibleH * this.camera.aspect;
+
+        // Margin leaves room for the wave displacement and mouse tilt.
+        const margin = 0.9;
+        const scale = Math.min((visibleW * margin) / this.planeW, (visibleH * margin) / this.planeH);
+
+        this.mesh.scale.setScalar(scale);
     }
 
     setRenderer() {
@@ -384,6 +408,7 @@ class CanvAscii {
 
         this.camera.aspect = w / h;
         this.camera.updateProjectionMatrix();
+        this.fitMesh();
 
         this.filter.setSize(w, h);
 

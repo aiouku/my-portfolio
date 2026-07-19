@@ -7,8 +7,23 @@ import SkillsSection from "./components/SkillsSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import ThemeSwitcher from "./components/ThemeSwitcher";
+import ClosedSection from "./components/ClosedSection";
+
+// Set to false to restore the full portfolio.
+const SITE_CLOSED = true;
 
 export default function Home() {
+  if (SITE_CLOSED) {
+    return (
+      <main className="relative h-screen overflow-hidden">
+        <AnimatedBackground />
+        <div className="relative z-10">
+          <ClosedSection />
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="relative min-h-screen overflow-hidden">
       {/* Animated Background */}
