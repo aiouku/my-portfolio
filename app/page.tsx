@@ -10,7 +10,7 @@ import ThemeSwitcher from "./components/ThemeSwitcher";
 import ClosedSection from "./components/ClosedSection";
 
 // Set to false to restore the full portfolio.
-const SITE_CLOSED = true;
+const SITE_CLOSED = false;
 
 export default function Home() {
   if (SITE_CLOSED) {
